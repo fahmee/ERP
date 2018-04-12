@@ -1,0 +1,79 @@
+{% extends 'collage/base_visitor.html' %}
+{% block title %} Student {% endblock %}
+{% block student_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid students-container">
+
+    <div class="row">
+      <div class="panel panel-default">
+                <div class="panel-body"> 
+          <div class="col-sm-4 col-md-3">
+        <h1>{{ department.Depart_name }}</h1>
+    </div>
+     <div class="col-sm-4 col-md-3">
+         <h2>{{ department.sec_name }}</h2>
+     </div>
+     
+        </div>
+    </div>
+</div>
+    <div class="row">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                 
+                    
+ 
+                    <table class="table">
+                        <thead>
+                        <tr>
+                             <th>Name</th>
+                              <th>roll_no</th>
+                               <th>sub1_mark</th>
+                                <th>sub1_Attaindance</th>
+                                <th>sub2_mark</th>
+                                 <th>sub2_Attaindance</th>
+                                 <th>sub3_mark</th>
+                                  <th>sub3_Attaindance</th>
+                         
+                           
+                            <!--  <th>add subject</th> -->
+                           
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <td>{{ student.name }}</td>
+                                  <td>{{ student.roll_no }}</td>
+                               
+                             
+                               
+                                    <td>{{ student.sub1_marks }}</td>
+                                      <td>{{ student.sub1_attaindance }}</td>
+                                     <td>{{ student.sub2_marks }}</td>
+                                      <td>{{ student.sub2_attaindance }}</td>
+                                      <td>{{student.sub3_marks }}</td>
+                                       <td>{{ student.sub3_attaindance }}</td>
+                             
+                               
+                                
+                                
+                               
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    
+
+</div>
+
+
+{% endblock %}

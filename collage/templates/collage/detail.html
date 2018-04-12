@@ -1,0 +1,122 @@
+{% extends 'collage/base.html' %}
+{% block title %}{{ department }}{% endblock %}
+{% block departments_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid students-container">
+
+    <div class="row">
+      <div class="panel panel-default">
+                <div class="panel-body"> 
+          <div class="col-sm-4 col-md-3">
+        <h1>{{ department.Depart_name }}</h1>
+    </div>
+     <div class="col-sm-4 col-md-3">
+         <h2>{{ department.sec_name }}</h2>
+     </div>
+      <div class="col-sm-4 col-md-3">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+
+                 
+               
+                 <li class="{% block albums_active %}{% endblock %}"><a href="{% url 'collage:create_student' department.id %}"><span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp; Add student</a></li>
+            </ul>
+             </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Student</h3>
+
+                    
+ 
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                              <th>roll_no</th>
+                               <th>sub1_mark</th>
+                                <th>sub1_Attaindance</th>
+                                <th>sub2_mark</th>
+                                 <th>sub2_Attaindance</th>
+                                 <th>sub3_mark</th>
+                                  <th>sub3_Attaindance</th>
+                                	<th>Total Marks</th>
+                                	<th>Total Attandance%</th>
+
+
+                         
+                             <th>Delete</th>
+                            <!--   <th>update</th> -->
+                            <!--  <th>add subject</th> -->
+                           
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in department.student_set.all %}
+                            <tr>
+                                <td>{{ student.name }}</td>
+                                  <td>{{ student.roll_no }}</td>
+                               
+                             
+                               
+                                    <td>{{ student.sub1_marks }}</td>
+                                      <td>{{ student.sub1_attaindance }}</td>
+                                     <td>{{ student.sub2_marks }}</td>
+                                      <td>{{ student.sub2_attaindance }}</td>
+                                      <td>{{student.sub3_marks }}</td>
+                                      <td>{{ student.sub3_attaindance }}</td>
+                                      <td>{{ student.sub1_marks|add:student.sub2_marks|add:student.sub3_marks }}</td>
+                                      <td>{{ student.sub1_attaindance|add:student.sub2_attaindance|add:student.sub3_attaindance }}</td>
+                                       
+                                       
+                             
+                             
+
+                             
+                                    
+                               
+                                
+                                  <td>
+                                    <form action="{% url 'collage:delete_student' department.id student.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="student_id" value="{{ student.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                </td>
+                                <!--  <td>
+                                    <form action="{% url 'collage:delete_student' department.id student.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="student_id" value="{{ student.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Update
+                                        </button>
+                                    </form>
+                                </td> -->
+                                
+                                
+                               
+                                
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    
+
+</div>
+
+{% endblock %}

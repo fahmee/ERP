@@ -1,0 +1,55 @@
+{% extends 'collage/base.html' %}
+{% block departments_active %}active{% endblock %}
+
+{% block body %}
+<div class="departments-container container-fluid">
+
+    <!-- departments -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ user.username }}'s classes</h3>
+        </div>
+        {% if departments %}
+            {% for department in departments %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        
+                        <div class="caption">
+                            <h2>{{ department.Depart_name }}</h2>
+                            <h4>{{ department.sec_name  }}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'collage:detail' department.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete department -->
+                            <form action="{% url 'collage:delete_department' department.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="department_id" value="{{ department.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite department -->
+                          
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %} 
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'collage:create_department' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an department
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+   
+</div>
+{% endblock %}
